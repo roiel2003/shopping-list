@@ -1,0 +1,69 @@
+.item_list {
+    text-align: center;
+
+}
+
+.list {
+    margin: auto;
+}
+
+h2 {
+    margin: 0px;
+    border-bottom: 2px solid black;
+    padding: 5px;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: #FAFAFA;
+}
+
+th {
+    border: 1px solid #c2c1c1;
+    padding: 5px;
+    text-align: right;
+}
+
+td {
+    border: 1px solid #c2c1c1;
+    text-align: right;
+    padding: 3px;
+}
+
+.sort_icon {
+    width: 12px;
+    height: 12px;
+}
+
+.sort_icon:hover {
+    cursor: pointer;
+}
+
+.react_icon {
+    width: 30px;
+    height: 30px;
+    margin: auto 5px;
+}
+
+.total_cost_icon {
+    width: 25px;
+    height: 25px;
+    margin: auto 3px;
+}
+
+.horizontal {
+    display: inline-flex;
+    margin-bottom: 20px;
+}
+
+.scroll {
+    overflow-y: scroll;
+    height: 200px;
+    display: flex;
+    margin: auto;
+    width: fit-content;
+}
+
+.scroll::-webkit-scrollbar {
+    display: none;
+  }

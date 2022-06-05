@@ -1,0 +1,31 @@
+html {
+    direction: rtl;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #282949;
+    height: 100%;   
+}
+
+body {
+    width: 65%;
+    height: 100%;
+    margin: auto;
+    background-color: orange;
+}
+
+button {
+    border-radius: 10px;
+    color: white;
+    background-color: #1890FF;
+    border: none;
+    height: 40px;
+    width: 90px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.horizontal {
+    display: inline-flex;
+    margin: auto;
+}

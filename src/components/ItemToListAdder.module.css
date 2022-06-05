@@ -1,0 +1,21 @@
+.item_to_list_adder {
+    text-align: center;
+    border-top: 1px solid black;
+    height: 100%
+    
+}
+
+.horizontal {
+    display: flex;
+}
+
+.center {
+    margin: auto;
+    display: inline-flex;
+}
+
+.add_box_icon {
+    width: 30px;
+    height: 30px;
+    margin: auto 5px;
+}

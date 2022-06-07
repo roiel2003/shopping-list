@@ -4,15 +4,22 @@
 }
 
 .input_create {
-    margin: auto;
     margin-bottom: 15px;
     background-color: black;
     color: grey;
     border: none;
     display: block;
+    width: 100px;
 }
 
 button {
     display: block;
     margin: auto;
+}
+
+.input_box {
+    width: 200px;
+    margin: 0px auto;
+    display: flex;
+    justify-content: space-between;
 }

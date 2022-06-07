@@ -4,13 +4,20 @@
 }
 
 .input_add {
-    margin: auto;
+    width: 100px;
+    margin-bottom: 15px;
+    display: block;
+    border: none;
+}
+
+.select_add {
     margin-bottom: 15px;
     display: block;
 }
 
-.select_add {
-    margin: auto;
-    margin-bottom: 15px;
-    display: block;
+.input_box {
+    width: 200px;
+    margin: 0px auto;
+    display: flex;
+    justify-content: space-between;
 }

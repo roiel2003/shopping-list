@@ -36,34 +36,50 @@ export default function ItemCreate(props) {
     return (
         <div className={ItemCreateCSS.item_create}>
             <form onSubmit={handleSubmit}>
-                <input
-                    onChange={handleChange}
-                    value={formItem.category}
-                    name="category"
-                    className={ItemCreateCSS.input_create}
-                    placeholder="הזן קטגוריה"
-                ></input>
-                <input
-                    onChange={handleChange}
-                    value={formItem.name}
-                    name="name"
-                    className={ItemCreateCSS.input_create}
-                    placeholder="הזן שם מוצר"
-                ></input>
-                <input
-                    onChange={handleChange}
-                    value={formItem.quantity}
-                    name="quantity"
-                    className={ItemCreateCSS.input_create}
-                    placeholder="הזן כמות"
-                ></input>
-                <input
-                    onChange={handleChange}
-                    value={formItem.price}
-                    name="price"
-                    className={ItemCreateCSS.input_create}
-                    placeholder="הזן מחיר ליחידה"
-                ></input>
+                <div className={ItemCreateCSS.input_box}>
+                    <label htmlFor="category">קטגוריה: </label>
+                    <input
+                        onChange={handleChange}
+                        value={formItem.category}
+                        id="category"
+                        name="category"
+                        className={ItemCreateCSS.input_create}
+                        placeholder="הזן קטגוריה"
+                    ></input>
+                </div>
+                <div className={ItemCreateCSS.input_box}>
+                    <label htmlFor="name">שם: </label>
+                    <input
+                        onChange={handleChange}
+                        value={formItem.name}
+                        id="name"
+                        name="name"
+                        className={ItemCreateCSS.input_create}
+                        placeholder="הזן שם מוצר"
+                    ></input>
+                </div>
+                <div className={ItemCreateCSS.input_box}>
+                    <label htmlFor="quantity">כמות: </label>
+                    <input
+                        onChange={handleChange}
+                        value={formItem.quantity}
+                        id="quantity"
+                        name="quantity"
+                        className={ItemCreateCSS.input_create}
+                        placeholder="הזן כמות"
+                    ></input>
+                </div>
+                <div className={ItemCreateCSS.input_box}>
+                    <label htmlFor="price"> מחיר ליחידה: </label>
+                    <input
+                        onChange={handleChange}
+                        value={formItem.price}
+                        id="price"
+                        name="price"
+                        className={ItemCreateCSS.input_create}
+                        placeholder="הזן מחיר ליחידה"
+                    ></input>
+                </div>
                 <button type="submit">הוסף מוצר!</button>
             </form>
         </div>

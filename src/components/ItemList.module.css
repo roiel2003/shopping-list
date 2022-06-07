@@ -5,6 +5,7 @@
 
 .list {
     margin: auto;
+    margin-top: 0px;
 }
 
 h2 {
@@ -66,4 +67,4 @@ td {
 
 .scroll::-webkit-scrollbar {
     display: none;
-  }
+}

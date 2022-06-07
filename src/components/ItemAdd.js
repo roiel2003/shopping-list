@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import ItemAddCSS from "./ItemAdd.module.css";
 import { ItemsContext } from "../ItemsContext";
 import PremadeItems from "../PremadeItems.json";
+import { nanoid } from "nanoid";
 
 export default function ItemAdd(props) {
     const items = PremadeItems.concat(useContext(ItemsContext));
@@ -47,11 +48,11 @@ export default function ItemAdd(props) {
     });
 
     const itemsOfCategoryElements = itemsOfCategory.map((item) => (
-        <option value={item}>{item}</option>
+        <option value={item} key={nanoid()}>{item}</option>
     ));
 
     const categoryElements = categories.map((category) => (
-        <option value={category}>{category}</option>
+        <option value={category} key={nanoid()}>{category}</option>
     ));
 
     function handleCategoryChange(event) {
@@ -76,34 +77,50 @@ export default function ItemAdd(props) {
     return (
         <div className={ItemAddCSS.item_add}>
             <form onSubmit={handleSubmit}>
-                <select
-                    onChange={handleCategoryChange}
-                    defaultValue="default"
-                    name="category"
-                    className={ItemAddCSS.select_add}
-                >
-                    {categoryElements}
-                </select>
-                <select
-                    id="selectedItem"
-                    onChange={handleChange}
-                    name="name"
-                    className={ItemAddCSS.select_add}
-                >
-                    {itemsOfCategoryElements}
-                </select>
-                <input
-                    onChange={handleChange}
-                    name="quantity"
-                    className={ItemAddCSS.input_add}
-                    placeholder="הזן כמות"
-                ></input>
-                <input
-                    onChange={handleChange}
-                    name="price"
-                    className={ItemAddCSS.input_add}
-                    placeholder="הזן מחיר ליחידה"
-                ></input>
+                <div className={ItemAddCSS.input_box}>
+                    <label htmlFor="category">קטגוריה: </label>
+                    <select
+                        onChange={handleCategoryChange}
+                        value={formItem.category}
+                        id="category"
+                        name="category"
+                        className={ItemAddCSS.select_add}
+                    >
+                        {categoryElements}
+                    </select>
+                </div>
+                <div className={ItemAddCSS.input_box}>
+                    <label htmlFor="selectedItem">בחר מוצר: </label>
+                    <select
+                        value={formItem.name}
+                        id="selectedItem"
+                        onChange={handleChange}
+                        name="name"
+                        className={ItemAddCSS.select_add}
+                    >
+                        {itemsOfCategoryElements}
+                    </select>
+                </div>
+                <div className={ItemAddCSS.input_box}>
+                    <label htmlFor="quantity">כמות: </label>
+                    <input
+                        onChange={handleChange}
+                        id="quantity"
+                        name="quantity"
+                        className={ItemAddCSS.input_add}
+                        placeholder="הזן כמות"
+                    ></input>
+                </div>
+                <div className={ItemAddCSS.input_box}>
+                    <label htmlFor="price">מחיר ליחידה: </label>
+                    <input
+                        onChange={handleChange}
+                        id="price"
+                        name="price"
+                        className={ItemAddCSS.input_add}
+                        placeholder="הזן מחיר ליחידה"
+                    ></input>
+                </div>
                 <button type="submit">הוסף מוצר!</button>
             </form>
         </div>

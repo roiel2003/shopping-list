@@ -7,7 +7,6 @@ import addBoxIcon from "../assets/add_box.svg";
 
 export default function ItemToListAdder(props) {
     async function handleNewItem(item) {
-        console.log("sending: " + JSON.stringify(item));
         await axios.post("http://localhost:3001/newItem", item);
         props.getItems();
     }

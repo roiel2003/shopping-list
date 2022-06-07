@@ -21,7 +21,7 @@ button {
     width: 90px;
 }
 
-button:hover {
+button {
     cursor: pointer;
 }
 

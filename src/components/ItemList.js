@@ -6,11 +6,12 @@ import sortIcon from "../assets/sort.svg";
 import reactIcon from "../assets/react_icon.svg";
 import vIcon from "../assets/v_icon.svg";
 import xIcon from "../assets/x_icon.svg";
+import { nanoid } from 'nanoid'
 
 export default function ItemList(props) {
     const items = useContext(ItemsContext);
 
-    const itemElements = items.map((item) => <ListItem item={item} />);
+    const itemElements = items.map((item) => <ListItem item={item} key={nanoid()}/>);
 
     const totalCost = items.reduce((a, b) => {
         return a + b.price * b.quantity;

@@ -64,7 +64,7 @@ export default function ItemAdd(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        if (items.length === process.env.REACT_APP_MAX_ITEMS) {
+        if (items.length !== process.env.REACT_APP_MAX_ITEMS) {
             if (
                 formItem.category &&
                 formItem.name &&

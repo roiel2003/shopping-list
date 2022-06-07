@@ -24,7 +24,7 @@ export default function ItemCreate(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        if(items === process.env.REACT_APP_MAX_ITEMS) {
+        if(items !== process.env.REACT_APP_MAX_ITEMS) {
             if (
                 formItem.category &&
                 formItem.name &&

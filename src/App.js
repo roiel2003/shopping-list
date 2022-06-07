@@ -13,7 +13,7 @@ export default function App() {
             const res = await axios.get("http://localhost:3001/getItems");
             setItems(res.data);
         } catch (error) {
-            throw error;
+            console.log(error);
         }
     }
 
@@ -21,34 +21,12 @@ export default function App() {
         getItems();
     }, []);
 
-    function sortByCategory() {
-        setItems((prevItem) => {
-            prevItem.sort((a, b) => a.category.localeCompare(b.category));
-            return [...prevItem];
-        });
-    }
-    function sortByPrice() {
-        setItems((prevItem) => {
-            prevItem.sort((a, b) => a.price - b.price);
-            return [...prevItem];
-        });
-    }
-    function sortByTotalPrice() {
-        setItems((prevItem) => {
-            prevItem.sort(
-                (a, b) => a.price * a.quantity - b.price * b.quantity
-            );
-            return [...prevItem];
-        });
-    }
-
     return (
         <div className={AppCSS.app}>
             <ItemsContext.Provider value={items}>
                 <ItemList
-                    sortByCategory={sortByCategory}
-                    sortByPrice={sortByPrice}
-                    sortByTotalPrice={sortByTotalPrice}
+                    setItems={(callback) => setItems(callback)}
+                    getItems={getItems}
                 />
                 <ItemToListAdder getItems={getItems} />
             </ItemsContext.Provider>

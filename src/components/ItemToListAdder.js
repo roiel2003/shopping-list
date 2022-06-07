@@ -1,26 +1,32 @@
 import React from "react";
 import ItemCreate from "./ItemCreate";
 import ItemAdd from "./ItemAdd";
-import ItemToListAdderCSS from "./ItemToListAdder.module.css";
+import styles from "./ItemToListAdder.module.css";
 import axios from "axios";
 import addBoxIcon from "../assets/add_box.svg";
+import { nanoid } from "nanoid";
 
 export default function ItemToListAdder(props) {
     async function handleNewItem(item) {
-        await axios.post("http://localhost:3001/newItem", item);
-        props.getItems();
+        item.key = nanoid()
+        try {
+            await axios.post("http://localhost:3001/newItem", item);
+            props.getItems();
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
-        <div className={ItemToListAdderCSS.item_to_list_adder}>
-            <div className={ItemToListAdderCSS.center}>
+        <div className={styles.item_to_list_adder}>
+            <div className={styles.center}>
                 <img
                     src={addBoxIcon}
-                    className={ItemToListAdderCSS.add_box_icon}
+                    className={styles.add_box_icon}
                 ></img>
                 <h3>הוסף מוצר חדש:</h3>
             </div>
-            <div className={ItemToListAdderCSS.horizontal}>
+            <div className={styles.horizontal}>
                 <ItemCreate handleNewItem={(item) => handleNewItem(item)} />
                 <ItemAdd handleNewItem={(item) => handleNewItem(item)} />
             </div>

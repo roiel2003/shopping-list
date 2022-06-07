@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import styles from "./ItemCreate.module.css";
+import { ItemsContext } from "../ItemsContext";
 
 export default function ItemCreate(props) {
     const [formItem, setFromItem] = useState({
@@ -8,6 +9,8 @@ export default function ItemCreate(props) {
         quantity: "",
         price: "",
     });
+
+    const items = useContext(ItemsContext)
 
     function handleChange(event) {
         const { value, name } = event.target;
@@ -21,15 +24,19 @@ export default function ItemCreate(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        if (
-            formItem.category &&
-            formItem.name &&
-            !isNaN(formItem.price) &&
-            !isNaN(formItem.quantity)
-        ) {
-            props.handleNewItem(formItem);
+        if(items === process.env.REACT_APP_MAX_ITEMS) {
+            if (
+                formItem.category &&
+                formItem.name &&
+                !isNaN(formItem.price) &&
+                !isNaN(formItem.quantity)
+            ) {
+                props.handleNewItem(formItem);
+            } else {
+                alert("הנתונים שהזנת לא מתאימים");
+            }
         } else {
-            alert("הנתונים שהזנת לא מתאימים");
+            alert("הגעת לכמות מוצרים מקסימלית")
         }
     }
 

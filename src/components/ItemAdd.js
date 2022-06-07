@@ -5,14 +5,16 @@ import PremadeItems from "../PremadeItems.json";
 import { nanoid } from "nanoid";
 
 export default function ItemAdd(props) {
-    const items = PremadeItems.concat(useContext(ItemsContext));
-    const [chosenCategory, setChosenCategory] = useState(items[0].category);
+    const items = useContext(ItemsContext)
+    const allItems = PremadeItems.concat(useContext(ItemsContext));
+    const [chosenCategory, setChosenCategory] = useState(allItems[0].category);
     const [formItem, setFormItem] = useState({
         category: chosenCategory,
-        name: items[0].name,
+        name: allItems[0].name,
         quantity: "",
         price: "",
     });
+
 
     useEffect(() => {
         handleChange({
@@ -35,7 +37,7 @@ export default function ItemAdd(props) {
 
     let categories = [];
     const itemsOfCategory = [];
-    items.forEach((item) => {
+    allItems.forEach((item) => {
         if (!categories.includes(item.category)) {
             categories.push(item.category);
         }
@@ -62,15 +64,19 @@ export default function ItemAdd(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        if (
-            formItem.category &&
-            formItem.name &&
-            !isNaN(parseInt(formItem.price)) &&
-            !isNaN(parseInt(formItem.quantity))
-        ) {
-            props.handleNewItem(formItem);
+        if (items.length === process.env.REACT_APP_MAX_ITEMS) {
+            if (
+                formItem.category &&
+                formItem.name &&
+                !isNaN(parseInt(formItem.price)) &&
+                !isNaN(parseInt(formItem.quantity))
+            ) {
+                props.handleNewItem(formItem);
+            } else {
+                alert("הנתונים שהזנת לא מתאימים");
+            }
         } else {
-            alert("הנתונים שהזנת לא מתאימים");
+            alert("הגעת לכמות מוצרים מקסימלית")
         }
     }
 

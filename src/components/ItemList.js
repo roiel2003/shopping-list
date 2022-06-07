@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./ItemList.module.css";
 import ListItem from "./ListItem";
 import { ItemsContext } from "../ItemsContext";
@@ -9,6 +9,11 @@ import xIcon from "../assets/x_icon.svg";
 import axios from "axios";
 
 export default function ItemList(props) {
+
+    const [sortedByCategory, setSortedByCategory] = useState(false)
+    const [sortedByPrice, setSortedByPrice] = useState(false)
+    const [sortedByTotalPrice, setSortedByTotalPrice] = useState(false)
+
     const items = useContext(ItemsContext);
 
     const itemElements = items.map((item) => <ListItem item={item} key={item.key} itemDelete={itemDelete}/>);
@@ -37,13 +42,29 @@ export default function ItemList(props) {
     function sortByCategory() {
         props.setItems((prevItem) => {
             prevItem.sort((a, b) => a.category.localeCompare(b.category));
-            return [...prevItem];
+            if (sortedByCategory) {
+                setSortedByCategory(false)
+                return [...prevItem].reverse();    
+            } else {
+                setSortedByCategory(true)
+                setSortedByPrice(false)
+                setSortedByTotalPrice(false)
+                return [...prevItem];
+            }
         });
     }
     function sortByPrice() {
         props.setItems((prevItem) => {
             prevItem.sort((a, b) => a.price - b.price);
-            return [...prevItem];
+            if (sortedByPrice) {
+                setSortedByPrice(false)
+                return [...prevItem].reverse();    
+            } else {
+                setSortedByCategory(false)
+                setSortedByPrice(true)
+                setSortedByTotalPrice(false)
+                return [...prevItem];
+            }
         });
     }
     function sortByTotalPrice() {
@@ -51,7 +72,15 @@ export default function ItemList(props) {
             prevItem.sort(
                 (a, b) => a.price * a.quantity - b.price * b.quantity
             );
-            return [...prevItem];
+            if (sortedByTotalPrice) {
+                setSortedByTotalPrice(false)
+                return [...prevItem].reverse();    
+            } else {
+                setSortedByCategory(false)
+                setSortedByPrice(false)
+                setSortedByTotalPrice(true)
+                return [...prevItem];
+            }
         });
     }
 

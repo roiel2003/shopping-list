@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import ItemAddCSS from "./ItemAdd.module.css";
+import styles from "./ItemAdd.module.css";
 import { ItemsContext } from "../ItemsContext";
 import PremadeItems from "../PremadeItems.json";
 import { nanoid } from "nanoid";
@@ -81,49 +81,49 @@ export default function ItemAdd(props) {
     }
 
     return (
-        <div className={ItemAddCSS.item_add}>
+        <div className={styles.item_add}>
             <form onSubmit={handleSubmit}>
-                <div className={ItemAddCSS.input_box}>
+                <div className={styles.input_box}>
                     <label htmlFor="category">קטגוריה: </label>
                     <select
                         onChange={handleCategoryChange}
                         value={formItem.category}
                         id="category"
                         name="category"
-                        className={ItemAddCSS.select_add}
+                        className={styles.select_add}
                     >
                         {categoryElements}
                     </select>
                 </div>
-                <div className={ItemAddCSS.input_box}>
+                <div className={styles.input_box}>
                     <label htmlFor="selectedItem">בחר מוצר: </label>
                     <select
                         value={formItem.name}
                         id="selectedItem"
                         onChange={handleChange}
                         name="name"
-                        className={ItemAddCSS.select_add}
+                        className={styles.select_add}
                     >
                         {itemsOfCategoryElements}
                     </select>
                 </div>
-                <div className={ItemAddCSS.input_box}>
+                <div className={styles.input_box}>
                     <label htmlFor="quantity">כמות: </label>
                     <input
                         onChange={handleChange}
                         id="quantity"
                         name="quantity"
-                        className={ItemAddCSS.input_add}
+                        className={styles.input_add}
                         placeholder="הזן כמות"
                     ></input>
                 </div>
-                <div className={ItemAddCSS.input_box}>
+                <div className={styles.input_box}>
                     <label htmlFor="price">מחיר ליחידה: </label>
                     <input
                         onChange={handleChange}
                         id="price"
                         name="price"
-                        className={ItemAddCSS.input_add}
+                        className={styles.input_add}
                         placeholder="הזן מחיר ליחידה"
                     ></input>
                 </div>

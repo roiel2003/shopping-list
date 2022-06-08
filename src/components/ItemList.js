@@ -1,52 +1,90 @@
 import React, { useContext } from "react";
-import ItemListCSS from "./ItemList.module.css";
+import styles from "./ItemList.module.css";
 import ListItem from "./ListItem";
 import { ItemsContext } from "../ItemsContext";
 import sortIcon from "../assets/sort.svg";
 import reactIcon from "../assets/react_icon.svg";
 import vIcon from "../assets/v_icon.svg";
 import xIcon from "../assets/x_icon.svg";
-import { nanoid } from 'nanoid'
+import axios from "axios";
 
 export default function ItemList(props) {
     const items = useContext(ItemsContext);
 
-    const itemElements = items.map((item) => <ListItem item={item} key={nanoid()}/>);
+    const itemElements = items.map((item) => <ListItem item={item} key={item.key} itemDelete={itemDelete}/>);
 
     const totalCost = items.reduce((a, b) => {
         return a + b.price * b.quantity;
     }, 0);
 
+    async function itemDelete(key) {
+        try {
+            await axios.delete('http://localhost:3001/deleteItem', {
+                headers: {
+                  Authorization: ""
+                },
+                data: {
+                    key: key
+                }
+            })
+            props.getItems();
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    function sortByCategory() {
+        props.setItems((prevItem) => {
+            prevItem.sort((a, b) => a.category.localeCompare(b.category));
+            return [...prevItem];
+        });
+    }
+    function sortByPrice() {
+        props.setItems((prevItem) => {
+            prevItem.sort((a, b) => a.price - b.price);
+            return [...prevItem];
+        });
+    }
+    function sortByTotalPrice() {
+        props.setItems((prevItem) => {
+            prevItem.sort(
+                (a, b) => a.price * a.quantity - b.price * b.quantity
+            );
+            return [...prevItem];
+        });
+    }
+
     return (
-        <div className={ItemListCSS.item_list}>
-            <div className={ItemListCSS.horizontal}>
-                <img src={reactIcon} className={ItemListCSS.react_icon}></img>
+        <div className={styles.item_list}>
+            <div className={styles.horizontal}>
+                <img src={reactIcon} className={styles.react_icon}></img>
                 <h2>רשימת הקניות שלי {`(${items.length})`}</h2>
             </div>
-            <div className={ItemListCSS.scroll}>
-                <table className={ItemListCSS.list}>
+            <div className={styles.scroll}>
+                <table className={styles.list}>
                     <thead>
                         <tr>
-                            <th onClick={props.sortByCategory}>
+                            <th onClick={sortByCategory}>
                                 קטגוריה{" "}
                                 <img
-                                    className={ItemListCSS.sort_icon}
+                                    className={styles.sort_icon}
                                     src={sortIcon}
                                 ></img>
                             </th>
                             <th>שם מוצר</th>
                             <th>כמות</th>
-                            <th onClick={props.sortByPrice}>
+                            <th onClick={sortByPrice}>
                                 מחיר ליחידה{" "}
                                 <img
-                                    className={ItemListCSS.sort_icon}
+                                    className={styles.sort_icon}
                                     src={sortIcon}
                                 ></img>
                             </th>
-                            <th onClick={props.sortByTotalPrice}>
+                            <th onClick={sortByTotalPrice}>
                                 מחיר עבור מוצר{" "}
                                 <img
-                                    className={ItemListCSS.sort_icon}
+                                    className={styles.sort_icon}
                                     src={sortIcon}
                                 ></img>
                             </th>
@@ -58,7 +96,7 @@ export default function ItemList(props) {
             <div className="horizontal">
                 <img
                     src={totalCost < 200 ? vIcon : xIcon}
-                    className={ItemListCSS.total_cost_icon}
+                    className={styles.total_cost_icon}
                 ></img>
                 <p>עלות כוללת: {totalCost}</p>
             </div>
